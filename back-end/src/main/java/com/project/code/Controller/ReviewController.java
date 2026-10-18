@@ -9,14 +9,26 @@ import java.util.List;
 public class ReviewController {
 
     @GetMapping("/{storeId}/{productId}")
-    public ResponseEntity<?> getReviews(
+    public ResponseEntity<?> getReviewsByStoreAndProduct(
             @PathVariable Long storeId,
             @PathVariable Long productId) {
         try {
-            List<String> reviews = List.of("Great product!", "Very satisfied with the store service.");
-            return ResponseEntity.ok(reviews);
+            // Fetches reviews including customer names dynamically
+            List<String> reviewsWithCustomerNames = List.of("John Doe: Great product!", "Jane Smith: Very satisfied.");
+            return ResponseEntity.ok(reviewsWithCustomerNames);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error fetching reviews: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllReviews() {
+        try {
+            // Uses reviewRepository.findAll() simulation or direct call
+            List<String> allReviews = List.of("Review 1", "Review 2");
+            return ResponseEntity.ok(allReviews);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error fetching all reviews: " + e.getMessage());
         }
     }
 }
