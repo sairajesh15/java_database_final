@@ -1,5 +1,6 @@
 package com.project.code.Repo;
 
+import com.project.code.Model.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,10 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface InventoryRepository extends JpaRepository<Object, Long> {
+public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     @Query("SELECT i FROM Inventory i WHERE i.product.id = :productId AND i.store.id = :storeId")
-    Optional<Object> findByProductAndStoreIds(@Param("productId") Long productId, @Param("storeId") Long storeId);
+    Optional<Inventory> findByProductAndStoreIds(@Param("productId") Long productId, @Param("storeId") Long storeId);
 
-    List<Object> findAllByStoreId(Long storeId);
+    @Query("SELECT i FROM Inventory i WHERE i.store.id = :storeId")
+    List<Inventory> findAllByStoreId(@Param("storeId") Long storeId);
 }
