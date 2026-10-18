@@ -14,8 +14,8 @@ public class StoreController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/validate/{storeId}")
-    public ResponseEntity<String> validateStore(@PathVariable Long storeId) {
+    @GetMapping("/validate/store/{id}")
+    public ResponseEntity<String> validateStore(@PathVariable("id") Long storeId) {
         try {
             boolean exists = storeId != null && storeId > 0;
             if (exists) {
