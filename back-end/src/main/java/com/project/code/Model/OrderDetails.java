@@ -14,6 +14,9 @@ public class OrderDetails {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    /**
+     * The store where the order was placed.
+     */
     @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;
